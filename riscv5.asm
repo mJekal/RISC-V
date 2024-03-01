@@ -38,10 +38,10 @@ PARCING:
 	add t1, s0, s1		            	# t1 = s0 + s1
 	lb  t2, 0(t1)  		    	    	# t2 = buffer[ptr]
 	
-	li  t1, 120  		    	    	# t1 = 'x'
+	li  t1, MUL_ASCII  		    	# t1 = 'x'
 	beq t1, t2, OPERATE 	    	   	# if(t1==t2) OPERATE()
 	
-	li  t1, 48			    	# t1 = '0'
+	li  t1, ZERO_ASCII			# t1 = '0'
 	bge t2, t1, LOOP        		# if(t2 >= t1) LOOP()
 	
 	jal x0, OPERATE    		    	# OPERATE()
@@ -66,13 +66,13 @@ LOOP2:
 	add t1, s0, s1				# t1 = s0 + s1
 	lb t2, 0(t1)				# t2 = Buffer[ptr]
 	
-	li  t1, 120				# t1 = 'x'
+	li  t1, MUL_ASCII			# t1 = 'x'
 	beq t1, t2, RETURN			# if(t1==t2) RETURN()
 	
-	li  t1, 48				# t1 = '0'
+	li  t1, ZERO_ASCII			# t1 = '0'
 	blt t2, t1, RETURN			# if(t1<t2) RETURN()
 	
-	li t1, 61				# t1 = '='
+	li t1, EQ_ASCII				# t1 = '='
 	beq t1, t2, RETURN			# if(t1==t2) RETURN()
 	
 	li t1, 10				# t1 = 10
@@ -93,19 +93,19 @@ OPERATE:
 	add t1, s0, s1				# t1 = s0 + s1
 	lb t2, 0(t1)				# t2 = Buffer[ptr]
 	
-	li  t1, 61				# t1 = '='
+	li  t1, EQ_ASCII			# t1 = '='
 	beq t1, t2, EXIT			# if(t1==t2) EXIT()
 	
-	li  t1, 43				# t1 = '+'
+	li  t1, ADD_ASCII			# t1 = '+'
 	beq t1, t2, PLUS			# if(t1==t2) PLUS()
 	
-	li t1, 45				# t1 = '-'
+	li t1, SUB_ASCII			# t1 = '-'
 	beq t1, t2, SUB				# if(t1==t2) SUB()
 	
-	li t1, 120				# t1 = 'x'
+	li t1, MUL_ASCII			# t1 = 'x'
 	beq t1, t2, MUL 			# if(t1==t2) MUL()
 	
-	li t1, 47				# t1 = '/'
+	li t1, DIV_ASCII			# t1 = '/'
 	beq t1, t2, DIV				# if(t1==t2) DIV()
 	
 PLUS:
